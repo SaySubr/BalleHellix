@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "action player",
+    "maps": [
+        {
+            "name": "controller",
+            "id": "8deb3855-5460-4d63-9456-9542eda7e210",
+            "actions": [
+                {
+                    "name": "fire",
+                    "type": "Button",
+                    "id": "16aa9718-5d4a-456a-9d2c-f7562ca59e59",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5ae6be31-75ef-49c9-9dbc-c4ef18331dfa",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96ced5ad-2f02-4c73-8618-4140ee89d5f9",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

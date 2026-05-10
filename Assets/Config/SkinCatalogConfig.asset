@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2a2352a26a63943a84140a2438ea8f, type: 3}
+  m_Name: SkinCatalogConfig
+  m_EditorClassIdentifier: Assembly-CSharp::SkinConfig
+  groups:
+  - target: 1
+    title: FireBall
+    skins:
+    - id: 1
+      displayName: Pistol
+      cost: 0
+      prefab: {fileID: 4337226263155959577, guid: d2be410a98970874099bd9cf14ce0025, type: 3}
+    - id: 2
+      displayName: DSAD
+      cost: 5
+      prefab: {fileID: 8762272648331896080, guid: eac0aeccf3635454dbdcbe7503db199d, type: 3}
+    - id: 3
+      displayName: dsadds
+      cost: 17
+      prefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+  - target: 0
+    title: Helix
+    skins:
+    - id: 1
+      displayName: Ball
+      cost: 0
+      prefab: {fileID: 7230772709336453376, guid: 8979ca814b4eeb342af82396ccdd605e, type: 3}
+    - id: 2
+      displayName: DSADSA
+      cost: 5
+      prefab: {fileID: 4337226263155959577, guid: d2be410a98970874099bd9cf14ce0025, type: 3}
+    - id: 3
+      displayName: DSADSA
+      cost: 19
+      prefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}

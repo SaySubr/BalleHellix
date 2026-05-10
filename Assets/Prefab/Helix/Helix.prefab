@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4667249621288216928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4218128490552115562}
+  - component: {fileID: 2457279297598772987}
+  - component: {fileID: 1737295040003450272}
+  m_Layer: 0
+  m_Name: Helix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4218128490552115562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667249621288216928}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2457279297598772987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667249621288216928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc67eed78fed9042b71a1c1adbf4ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HelixController
+  rotationSpeed: 10
+--- !u!114 &1737295040003450272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667249621288216928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae94b312d65ab0b4abfbcd8a41ed0586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
+  numberOfLevels: 10
+  levelHeight: 2
+  poleRadius: 0.669
+  themes:
+  - themeName: Theme 1
+    safeColor: {r: 0.19436097, g: 1, b: 0, a: 0}
+    dangerColor: {r: 0, g: 0.08237791, b: 1, a: 0}
+    poleColor: {r: 0, g: 1, b: 0.065425634, a: 0}
+    ballColor: {r: 1, g: 0, b: 0, a: 0}
+  - themeName: Theme 2
+    safeColor: {r: 1, g: 0, b: 0.71985435, a: 0}
+    dangerColor: {r: 1, g: 0, b: 0, a: 0}
+    poleColor: {r: 0, g: 0.09038353, b: 1, a: 0}
+    ballColor: {r: 0, g: 1, b: 0.9219928, a: 0}
+  - themeName: Theme 3
+    safeColor: {r: 0.8822017, g: 1, b: 0, a: 0}
+    dangerColor: {r: 0, g: 0.6748581, b: 1, a: 0}
+    poleColor: {r: 1, g: 0.49694997, b: 0, a: 0}
+    ballColor: {r: 0.6474614, g: 0, b: 1, a: 0}
+  - themeName: Theme 4
+    safeColor: {r: 0.7161851, g: 0, b: 1, a: 0}
+    dangerColor: {r: 0.6608964, g: 1, b: 0, a: 0}
+    poleColor: {r: 0, g: 1, b: 0.89133716, a: 0}
+    ballColor: {r: 1, g: 0.94000983, b: 0, a: 0}
+  - themeName: Theme 5
+    safeColor: {r: 0, g: 1, b: 0.6256571, a: 0}
+    dangerColor: {r: 0, g: 1, b: 0.92019224, a: 0}
+    poleColor: {r: 1, g: 0.77448, b: 0, a: 0}
+    ballColor: {r: 1, g: 0, b: 0.669919, a: 0}
+  segments: 80
+  gapPercentage: 0.25
+  innerRadius: 0.5
+  outerRadius: 1.5
+  thickness: 0.2
+  maxDangerZones: 2
+  dangerZoneSize: 10
+  safeMaterial: {fileID: 2100000, guid: c658f530376ec5844893cfcb927ea848, type: 2}
+  dangerMaterial: {fileID: 2100000, guid: 242411c03465aec4e843a37f80c313ac, type: 2}
+  poleMaterial: {fileID: 2100000, guid: 095c026eceba03947b7f80e5013e39ec, type: 2}
+  goalMaterial: {fileID: 2100000, guid: 0b9783eb1ba85b646a80ce0cdc89e9b9, type: 2}

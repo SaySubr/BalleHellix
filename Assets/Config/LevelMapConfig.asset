@@ -1,0 +1,526 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699de94b3d2c8c34792ed8497f8e6a6c, type: 3}
+  m_Name: LevelMapConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Config.LevelMapConfig
+  levels:
+  - levelNumber: 1
+    position: {x: 0, y: 0, z: 0}
+    isUnlocked: 1
+    starsEarned: 3
+    gameType: 0
+    isBonusLevel: 0
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 6661967844676861532, guid: f113b36e287e18d4fbc4ba3ac83daf43, type: 3}
+      obstaclePrefab: {fileID: 0}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 7681553491997659006, guid: def75ea83cfc433488cbda071d1628e0, type: 3}
+        backgroundMaterial: {fileID: 2100000, guid: 60b51f6c6eb714043aa7c0a477213210, type: 2}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: -90, y: 90, z: 90}
+        scale: {x: 200, y: 200, z: 800}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 20, y: 25}
+      blockHeight: 0.6
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 0
+      towerRotationSpeedRange: {x: 60, y: 60}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 90, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 0, z: 20}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 1
+      towerPulseSpeed: 0.5
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 301942481613501270, guid: 28afba318cbe25b4980b79656cc4fe2a, type: 3}
+      randomizeTowerScale: 0
+      towerScaleRange: {x: 1, y: 1}
+      uniformTowerScale: 0
+      overrideObstacles: 1
+      obstacleCountRange: {x: 1, y: 2}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 0.3, y: 0.5}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 1
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 4
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandMaterial: {fileID: 0}
+    lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
+    islandColor: {r: 0.2532465, g: 0.7735849, b: 0.12771447, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
+  - levelNumber: 2
+    position: {x: 5, y: 0, z: 5}
+    isUnlocked: 1
+    starsEarned: 3
+    gameType: 1
+    isBonusLevel: 1
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 0}
+      obstaclePrefab: {fileID: 0}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 50, y: 70}
+      blockHeight: 0.5
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 1
+      towerRotationSpeedRange: {x: 30, y: 180}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 0, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 1, z: 0}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 0
+      towerPulseSpeed: 2
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 0}
+      randomizeTowerScale: 1
+      towerScaleRange: {x: 0.5, y: 1.5}
+      uniformTowerScale: 1
+      overrideObstacles: 1
+      obstacleCountRange: {x: 5, y: 20}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 3, y: 10}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 2
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 3
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 2891578154627905873, guid: dff0f3ab5d5a6c44ea6c6eff86552427, type: 3}
+    islandMaterial: {fileID: 0}
+    lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
+    islandColor: {r: 1, g: 1, b: 1, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
+  - levelNumber: 3
+    position: {x: 6, y: 0, z: 25}
+    isUnlocked: 1
+    starsEarned: 3
+    gameType: 0
+    isBonusLevel: 0
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 3813061809764896953, guid: fb05a642530131045991efe487bddf09, type: 3}
+      obstaclePrefab: {fileID: 2777321617215310124, guid: b04f899c3513bbc4596dc544019eea8b, type: 3}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 10, y: 20}
+      blockHeight: 0.6
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 0
+      towerRotationSpeedRange: {x: 30, y: 180}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 0, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 1, z: 0}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 0
+      towerPulseSpeed: 2
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 0}
+      randomizeTowerScale: 0
+      towerScaleRange: {x: 0.5, y: 1.5}
+      uniformTowerScale: 0
+      overrideObstacles: 1
+      obstacleCountRange: {x: 1, y: 3}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 0.2, y: 0.5}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 1
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 4
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandMaterial: {fileID: 0}
+    lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
+    islandColor: {r: 1, g: 1, b: 1, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
+  - levelNumber: 4
+    position: {x: 7, y: 0, z: 45}
+    isUnlocked: 0
+    starsEarned: 3
+    gameType: 1
+    isBonusLevel: 1
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 0}
+      obstaclePrefab: {fileID: 0}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 50, y: 70}
+      blockHeight: 0.5
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 1
+      towerRotationSpeedRange: {x: 30, y: 180}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 0, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 1, z: 0}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 0
+      towerPulseSpeed: 2
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 0}
+      randomizeTowerScale: 1
+      towerScaleRange: {x: 0.5, y: 1.5}
+      uniformTowerScale: 1
+      overrideObstacles: 1
+      obstacleCountRange: {x: 5, y: 20}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 3, y: 10}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 4
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 4
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 2891578154627905873, guid: dff0f3ab5d5a6c44ea6c6eff86552427, type: 3}
+    islandMaterial: {fileID: 0}
+    lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
+    islandColor: {r: 0.37824848, g: 0.6415094, b: 0.46575674, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
+  - levelNumber: 5
+    position: {x: 4, y: 0, z: 60}
+    isUnlocked: 0
+    starsEarned: 3
+    gameType: 0
+    isBonusLevel: 0
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 0}
+      obstaclePrefab: {fileID: 0}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 50, y: 70}
+      blockHeight: 0.5
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 1
+      towerRotationSpeedRange: {x: 30, y: 180}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 0, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 1, z: 0}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 0
+      towerPulseSpeed: 2
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 0}
+      randomizeTowerScale: 1
+      towerScaleRange: {x: 0.5, y: 1.5}
+      uniformTowerScale: 1
+      overrideObstacles: 1
+      obstacleCountRange: {x: 5, y: 20}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 3, y: 10}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 1
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 4
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandMaterial: {fileID: 0}
+    lockedIslandMaterial: {fileID: 0}
+    islandColor: {r: 0.23642753, g: 0.30942044, b: 0.6509434, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
+  - levelNumber: 6
+    position: {x: 7, y: 0, z: 80}
+    isUnlocked: 0
+    starsEarned: 0
+    gameType: 0
+    isBonusLevel: 0
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 0}
+      obstaclePrefab: {fileID: 0}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 50, y: 70}
+      blockHeight: 0.5
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 1
+      towerRotationSpeedRange: {x: 30, y: 180}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 0, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 1, z: 0}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 0
+      towerPulseSpeed: 2
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 0}
+      randomizeTowerScale: 1
+      towerScaleRange: {x: 0.5, y: 1.5}
+      uniformTowerScale: 1
+      overrideObstacles: 1
+      obstacleCountRange: {x: 5, y: 20}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 3, y: 10}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 1
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 4
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandMaterial: {fileID: 2100000, guid: a7ca0d7ef97b5f74a897afb0be71aecb, type: 2}
+    lockedIslandMaterial: {fileID: 0}
+    islandColor: {r: 0.8301887, g: 0.09789959, b: 0.09789959, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
+  - levelNumber: 7
+    position: {x: 4, y: 0, z: 120}
+    isUnlocked: 0
+    starsEarned: 3
+    gameType: 1
+    isBonusLevel: 1
+    legacyBonusMigrated: 1
+    fireball:
+      towerBlockPrefab: {fileID: 0}
+      obstaclePrefab: {fileID: 0}
+      background:
+        spawnBackground: 1
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
+        positionOffset: {x: 0, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        parentToSpawner: 1
+      overrideTower: 1
+      towerHeightRange: {x: 50, y: 70}
+      blockHeight: 0.5
+      useVisibilityCulling: 1
+      visibleBlocksCount: 10
+      randomizeTowerRotation: 1
+      towerRotationSpeedRange: {x: 30, y: 180}
+      rotateTowerBlocks: 1
+      towerBlockStartRotation: {x: 0, y: 0, z: 0}
+      towerRotationAxis: {x: 0, y: 1, z: 0}
+      randomizeTowerRotationDirection: 1
+      invertTowerRotation: 0
+      towerBlockPulsate: 0
+      towerPulseSpeed: 2
+      towerPulseAmount: 0.1
+      towerBlockDestroyEffect: {fileID: 0}
+      randomizeTowerScale: 1
+      towerScaleRange: {x: 0.5, y: 1.5}
+      uniformTowerScale: 1
+      overrideObstacles: 1
+      obstacleCountRange: {x: 5, y: 20}
+      randomSpacing: 1
+      spacingRange: {x: 1, y: 5}
+      randomizeObstacleRotation: 1
+      obstacleRotationSpeedRange: {x: 30, y: 180}
+      randomizeObstacleSpeed: 1
+      obstacleSpeedRange: {x: 3, y: 10}
+      randomizeObstacleScale: 1
+      obstacleScaleRange: {x: 0.5, y: 1.5}
+      uniformObstacleScale: 1
+      obstacleParabolaHeight: 1
+      useObjectPool: 1
+      poolInitialSize: 30
+      poolMaxSize: 100
+    helix:
+      levelsToComplete: 1
+      additionalFloorsPerCompletedLevel: 2
+      numberOfLevels: 10
+      levelHeight: 4
+      poleRadius: 0.5
+      segments: 80
+      gapPercentage: 0.2
+      innerRadius: 0.5
+      outerRadius: 2.8
+      thickness: 0.2
+      maxDangerZones: 2
+      dangerZoneSize: 10
+    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandMaterial: {fileID: 2100000, guid: a7ca0d7ef97b5f74a897afb0be71aecb, type: 2}
+    lockedIslandMaterial: {fileID: 0}
+    islandColor: {r: 1, g: 1, b: 1, a: 1}
+    startX: -40
+    startZ: -40
+    spacing: 10
+    columns: 10
