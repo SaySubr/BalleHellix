@@ -1,3 +1,4 @@
+using System;
 using Config;
 using Data;
 using MainGame;
@@ -18,6 +19,7 @@ namespace MainMenu
 
         private static GameLauncher _instance;
         public static GameLauncher Instance => _instance;
+        public static event Action<LevelData> LevelLaunchRequested;
 
         private int _currentLevelNumber;
         private bool _isBonusMode;
@@ -104,6 +106,7 @@ namespace MainMenu
 
             int sceneIndex = _isBonusMode ? bonusSceneIndex : gameSceneIndex;
             Debug.Log($"GameLauncher: launch level {_currentLevelNumber} ({levelData.EffectiveGameType}) in scene {sceneIndex}.");
+            LevelLaunchRequested?.Invoke(levelData);
             SceneManager.LoadScene(sceneIndex);
         }
 

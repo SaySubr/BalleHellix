@@ -1,4 +1,5 @@
 ﻿using MainMenu;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class WinSystem : MonoBehaviour
     [SerializeField] private TowerGenerator towerGenerator;
     [SerializeField] private ObstacleGenerator obstacleGenerator;
     [SerializeField] private GameObject winCanvas; // 👈 ОТДЕЛЬНЫЙ Canvas!
+    [SerializeField] private PlayerController playerController;
     
 
     [Header("Тексты")]
@@ -27,11 +29,15 @@ public class WinSystem : MonoBehaviour
 
     private bool isWin = false;
     private int totalBlocksAtStart = 0;
+    private Coroutine pauseRoutine;
 
     private void Awake()
     {
         if (towerGenerator == null)
             towerGenerator = GetComponent<TowerGenerator>();
+
+        if (playerController == null)
+            playerController = FindFirstObjectByType<PlayerController>();
 
         // Проверяем Canvas
         if (winCanvas == null)
@@ -90,6 +96,8 @@ public class WinSystem : MonoBehaviour
     {
         totalBlocksAtStart = totalBlocks;
         isWin = false;
+        FireballRoundState.Reset();
+        SetPlayerControls(true);
 
         // Снимаем паузу
         Time.timeScale = 1f;
@@ -97,6 +105,7 @@ public class WinSystem : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         CancelInvoke(nameof(PauseGame));
+        StopPauseRoutine();
 
         // Прячем Canvas победы
         if (winCanvas != null)
@@ -119,7 +128,10 @@ public class WinSystem : MonoBehaviour
     private void IsWinningSon()
     {
         if (isWin) return;
+        if (!FireballRoundState.TryFinish()) return;
+
         isWin = true;
+        SetPlayerControls(false);
 
         Debug.Log($"🎉🎉🎉 ПОБЕДА! Уничтожена башня из {totalBlocksAtStart} блоков! 🎉🎉🎉");
 
@@ -157,7 +169,7 @@ public class WinSystem : MonoBehaviour
         }
 
         // Планируем паузу через N секунд
-        Invoke(nameof(PauseGame), pauseDelay);
+        StartPauseRoutine();
     }
 
     private void PauseGame()
@@ -170,6 +182,40 @@ public class WinSystem : MonoBehaviour
         // Курсор уже должен быть виден, но на всякий случай
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void StartPauseRoutine()
+    {
+        StopPauseRoutine();
+        pauseRoutine = StartCoroutine(PauseAfterDelayRoutine());
+    }
+
+    private IEnumerator PauseAfterDelayRoutine()
+    {
+        float delay = Mathf.Max(0f, pauseDelay);
+        if (delay > 0f)
+            yield return new WaitForSecondsRealtime(delay);
+
+        pauseRoutine = null;
+        PauseGame();
+    }
+
+    private void StopPauseRoutine()
+    {
+        if (pauseRoutine == null)
+            return;
+
+        StopCoroutine(pauseRoutine);
+        pauseRoutine = null;
+    }
+
+    private void SetPlayerControls(bool isEnabled)
+    {
+        if (playerController == null)
+            playerController = FindFirstObjectByType<PlayerController>();
+
+        if (playerController != null)
+            playerController.SetControlsEnabled(isEnabled);
     }
 
     #region Создание Canvas (если не назначен в инспекторе)
@@ -325,6 +371,9 @@ public class WinSystem : MonoBehaviour
     {
         isWin = false;
         totalBlocksAtStart = 0;
+        FireballRoundState.Reset();
+        SetPlayerControls(true);
+        StopPauseRoutine();
 
         if (obstacleGenerator != null)
         {

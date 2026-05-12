@@ -1,6 +1,5 @@
 using MainMenu.LevelMap;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace MainMenu
 {
@@ -13,12 +12,16 @@ namespace MainMenu
 
         [Header("Click")]
         [SerializeField] private LayerMask islandLayer;
+        [SerializeField] private float clickMaxDragDistance = 20f;
+        [SerializeField] private bool ignoreInputOverUI = true;
 
         [Header("Debug")]
         [SerializeField] private bool showDebugInfo = false;
 
         private bool _isDragging;
+        private bool _startedOverUI;
         private Vector2 _lastPointerPosition;
+        private Vector2 _startPointerPosition;
         private Camera _mainCamera;
         private IslandSpawner _islandSpawner;
 
@@ -38,80 +41,78 @@ namespace MainMenu
 
         private void Update()
         {
-            HandleMovement();
-            HandleClick();
+            HandlePointer();
         }
 
-        private void HandleMovement()
+        private void HandlePointer()
         {
-            float moveInput = 0f;
-
-            if (Mouse.current != null)
+            if (!ScreenPointerUtility.TryGetPrimaryPointer(out ScreenPointerState pointer))
             {
-                if (Mouse.current.leftButton.isPressed)
-                {
-                    Vector2 currentPos = Mouse.current.position.ReadValue();
-                    moveInput = ReadDragDelta(currentPos);
-                }
-                else
-                {
-                    _isDragging = false;
-                }
+                _isDragging = false;
+                _startedOverUI = false;
+                return;
             }
 
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+            if (pointer.WasPressedThisFrame)
             {
-                Vector2 currentPos = Touchscreen.current.primaryTouch.position.ReadValue();
-                moveInput = ReadDragDelta(currentPos);
+                BeginPointer(pointer);
             }
 
-            if (moveInput != 0f)
+            if (pointer.WasReleasedThisFrame)
             {
-                Vector3 newPos = transform.position + Vector3.forward * moveInput;
-                newPos.z = Mathf.Clamp(newPos.z, minZ, maxZ);
-                transform.position = newPos;
+                EndPointer(pointer);
+                return;
             }
+
+            if (pointer.IsPressed)
+                MoveByPointer(pointer.Position);
         }
 
-        private float ReadDragDelta(Vector2 currentPos)
+        private void BeginPointer(ScreenPointerState pointer)
         {
-            float moveInput = 0f;
+            _isDragging = true;
+            _startedOverUI = ignoreInputOverUI && ScreenPointerUtility.IsPointerOverUI(pointer.Position, pointer.PointerId);
+            _startPointerPosition = pointer.Position;
+            _lastPointerPosition = pointer.Position;
+        }
 
-            if (_isDragging)
-            {
-                Vector2 delta = currentPos - _lastPointerPosition;
-                moveInput = -delta.y * 0.01f * moveSpeed;
-            }
-            else
+        private void MoveByPointer(Vector2 currentPos)
+        {
+            if (!_isDragging)
             {
                 _isDragging = true;
+                _startPointerPosition = currentPos;
+                _lastPointerPosition = currentPos;
+                return;
             }
 
+            if (_startedOverUI)
+            {
+                _lastPointerPosition = currentPos;
+                return;
+            }
+
+            Vector2 delta = currentPos - _lastPointerPosition;
             _lastPointerPosition = currentPos;
-            return moveInput;
+
+            float moveInput = -delta.y * 0.01f * moveSpeed;
+            if (Mathf.Approximately(moveInput, 0f))
+                return;
+
+            Vector3 newPos = transform.position + Vector3.forward * moveInput;
+            newPos.z = Mathf.Clamp(newPos.z, minZ, maxZ);
+            transform.position = newPos;
         }
 
-        private void HandleClick()
+        private void EndPointer(ScreenPointerState pointer)
         {
-            bool isClick = false;
-            Vector3 clickPosition = Vector3.zero;
-
-            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            if (!_startedOverUI && Vector2.Distance(pointer.Position, _startPointerPosition) <= clickMaxDragDistance)
             {
-                isClick = true;
-                clickPosition = Mouse.current.position.ReadValue();
+                HandleRaycastClick(pointer.Position);
             }
 
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-            {
-                isClick = true;
-                clickPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-            }
-
-            if (isClick)
-            {
-                HandleRaycastClick(clickPosition);
-            }
+            _isDragging = false;
+            _startedOverUI = false;
         }
 
         private void HandleRaycastClick(Vector3 screenPosition)

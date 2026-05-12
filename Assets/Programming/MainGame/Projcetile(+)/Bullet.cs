@@ -122,6 +122,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!isActive || isReturningToPool) return;
+        if (FireballRoundState.IsFinished)
+        {
+            ReturnToPool();
+            return;
+        }
+
         if (hitColliders.Contains(other)) return;
 
         Debug.Log($"[Bullet] Попала в: {other.gameObject.name}, Tag: {other.tag}");

@@ -1,3 +1,4 @@
+using System.Collections;
 using MainMenu;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class LoseSystem : MonoBehaviour
     [SerializeField] private TankHealth tankHealth;
     [SerializeField] private TowerGenerator towerGenerator; // Для подсчёта блоков
     [SerializeField] private GameObject loseCanvas; // ОТДЕЛЬНЫЙ Canvas для поражения!
+    [SerializeField] private PlayerController playerController;
 
     [Header("Тексты")]
     [SerializeField] private TextMeshProUGUI loseTitleText; // Заголовок "ПОРАЖЕНИЕ!"
@@ -28,7 +30,22 @@ public class LoseSystem : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Button menuButton;
 
+    [Header("Rewarded Revive")]
+    [SerializeField] private Button rewardedReviveButton;
+    [SerializeField] private TextMeshProUGUI rewardedReviveCountdownText;
+    [SerializeField] private Image rewardedReviveCountdownImage;
+    [SerializeField] private float rewardedReviveOfferSeconds = 5f;
+    [SerializeField] private bool hideStandardButtonsDuringRewardOffer = true;
+
+    [Header("Rewarded Revive View")]
+    [SerializeField] private string rewardedReviveCountdownFormat = "{0}";
+    [SerializeField, Range(0f, 1f)] private float rewardedReviveImageStartFill = 1f;
+    [SerializeField, Range(0f, 1f)] private float rewardedReviveImageEndFill = 0f;
+
     private bool isLose = false;
+    private bool rewardedReviveUsed;
+    private Coroutine rewardedReviveRoutine;
+    private Coroutine pauseRoutine;
 
     private void Awake()
     {
@@ -55,12 +72,20 @@ public class LoseSystem : MonoBehaviour
             obstacleGenerator = GetComponent<ObstacleGenerator>();
         }
 
+        if (playerController == null)
+            playerController = FindFirstObjectByType<PlayerController>();
+
+        FireballRoundState.Reset();
+
         // Подписываемся на кнопки
         if (restartButton != null)
             restartButton.onClick.AddListener(OnRestartClicked);
 
         if (menuButton != null)
             menuButton.onClick.AddListener(OnMenuClicked);
+
+        if (rewardedReviveButton != null)
+            rewardedReviveButton.onClick.AddListener(OnRewardedReviveClicked);
     }
 
     private void OnDestroy()
@@ -71,6 +96,9 @@ public class LoseSystem : MonoBehaviour
 
         if (menuButton != null)
             menuButton.onClick.RemoveListener(OnMenuClicked);
+
+        if (rewardedReviveButton != null)
+            rewardedReviveButton.onClick.RemoveListener(OnRewardedReviveClicked);
     }
 
     private void OnEnable()
@@ -98,7 +126,10 @@ public class LoseSystem : MonoBehaviour
     public void ShowLoseScreen()
     {
         if (isLose) return;
+        if (!FireballRoundState.TryFinish()) return;
+
         isLose = true;
+        SetPlayerControls(false);
 
         Debug.Log($"💀💀💀 ПОРАЖЕНИЕ! Танк уничтожен! 💀💀💀");
 
@@ -137,7 +168,8 @@ public class LoseSystem : MonoBehaviour
         }
 
         // Планируем паузу через N секунд
-        Invoke(nameof(PauseGame), pauseDelay);
+        StartRewardedReviveOffer();
+        StartPauseRoutine();
     }
 
     private void PauseGame()
@@ -150,6 +182,40 @@ public class LoseSystem : MonoBehaviour
         // Показываем курсор
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void StartPauseRoutine()
+    {
+        StopPauseRoutine();
+        pauseRoutine = StartCoroutine(PauseAfterDelayRoutine());
+    }
+
+    private IEnumerator PauseAfterDelayRoutine()
+    {
+        float delay = Mathf.Max(0f, pauseDelay);
+        if (delay > 0f)
+            yield return new WaitForSecondsRealtime(delay);
+
+        pauseRoutine = null;
+        PauseGame();
+    }
+
+    private void StopPauseRoutine()
+    {
+        if (pauseRoutine == null)
+            return;
+
+        StopCoroutine(pauseRoutine);
+        pauseRoutine = null;
+    }
+
+    private void SetPlayerControls(bool isEnabled)
+    {
+        if (playerController == null)
+            playerController = FindFirstObjectByType<PlayerController>();
+
+        if (playerController != null)
+            playerController.SetControlsEnabled(isEnabled);
     }
 
     #region Создание Canvas (если не назначен в инспекторе)
@@ -287,9 +353,152 @@ public class LoseSystem : MonoBehaviour
 
     #endregion
 
+    private void StartRewardedReviveOffer()
+    {
+        StopRewardedReviveRoutine();
+
+        if (rewardedReviveUsed || rewardedReviveButton == null)
+        {
+            ShowStandardButtons(true);
+            return;
+        }
+
+        ShowStandardButtons(!hideStandardButtonsDuringRewardOffer);
+        ShowRewardedReviveButton(true);
+        ShowRewardedReviveCountdown(true);
+        rewardedReviveRoutine = StartCoroutine(RewardedReviveCountdownRoutine());
+    }
+
+    private IEnumerator RewardedReviveCountdownRoutine()
+    {
+        float remainingSeconds = Mathf.Max(0f, rewardedReviveOfferSeconds);
+
+        while (remainingSeconds > 0f && isLose)
+        {
+            UpdateRewardedReviveCountdown(remainingSeconds);
+            remainingSeconds -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (isLose)
+            ShowStandardButtons(true);
+
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
+        rewardedReviveRoutine = null;
+    }
+
+    private void OnRewardedReviveClicked()
+    {
+        if (!isLose || rewardedReviveUsed)
+            return;
+
+        StopRewardedReviveRoutine();
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
+        StopPauseRoutine();
+        Time.timeScale = 0f;
+
+        YandexAdsService.EnsureInstance().ShowRewarded(
+            ReviveAfterReward,
+            ShowStandardButtonsAfterFailedReward);
+    }
+
+    private void ReviveAfterReward()
+    {
+        rewardedReviveUsed = true;
+        ResetLose();
+        FireballRoundState.Reset();
+
+        if (tankHealth != null)
+            tankHealth.ResetHealth();
+
+        SetPlayerControls(true);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void ShowStandardButtonsAfterFailedReward()
+    {
+        if (!isLose)
+            return;
+
+        ShowStandardButtons(true);
+    }
+
+    private void ShowStandardButtons(bool isVisible)
+    {
+        if (restartButton != null)
+            restartButton.gameObject.SetActive(isVisible);
+
+        if (menuButton != null)
+            menuButton.gameObject.SetActive(isVisible);
+    }
+
+    private void ShowRewardedReviveButton(bool isVisible)
+    {
+        if (rewardedReviveButton == null)
+            return;
+
+        rewardedReviveButton.gameObject.SetActive(isVisible);
+    }
+
+    private void ShowRewardedReviveCountdown(bool isVisible)
+    {
+        if (rewardedReviveCountdownText != null)
+            rewardedReviveCountdownText.gameObject.SetActive(isVisible);
+
+        if (rewardedReviveCountdownImage != null)
+        {
+            rewardedReviveCountdownImage.gameObject.SetActive(isVisible);
+            if (isVisible)
+                rewardedReviveCountdownImage.fillAmount = rewardedReviveImageStartFill;
+        }
+    }
+
+    private void UpdateRewardedReviveCountdown(float seconds)
+    {
+        float duration = Mathf.Max(0.01f, rewardedReviveOfferSeconds);
+        float normalizedTimeLeft = Mathf.Clamp01(seconds / duration);
+
+        if (rewardedReviveCountdownText != null)
+            rewardedReviveCountdownText.text = FormatRewardedCountdown(seconds);
+
+        if (rewardedReviveCountdownImage != null)
+            rewardedReviveCountdownImage.fillAmount = Mathf.Lerp(
+                rewardedReviveImageEndFill,
+                rewardedReviveImageStartFill,
+                normalizedTimeLeft);
+    }
+
+    private string FormatRewardedCountdown(float seconds)
+    {
+        int secondsCeil = Mathf.CeilToInt(seconds);
+        if (string.IsNullOrWhiteSpace(rewardedReviveCountdownFormat))
+            return secondsCeil.ToString();
+
+        return rewardedReviveCountdownFormat
+            .Replace("{seconds}", secondsCeil.ToString())
+            .Replace("{0}", secondsCeil.ToString());
+    }
+
+    private void StopRewardedReviveRoutine()
+    {
+        if (rewardedReviveRoutine == null)
+            return;
+
+        StopCoroutine(rewardedReviveRoutine);
+        rewardedReviveRoutine = null;
+    }
+
     public void ResetLose()
     {
         isLose = false;
+        StopRewardedReviveRoutine();
+        StopPauseRoutine();
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
 
         if (loseCanvas != null)
             loseCanvas.SetActive(false);

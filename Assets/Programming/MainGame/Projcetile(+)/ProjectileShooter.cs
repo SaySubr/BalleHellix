@@ -51,4 +51,12 @@ public class ProjectileShooter : MonoBehaviour, IShooter
 
         nextFireTime = Time.time + weapon.FireRate;
     }
+
+    public void StopShooting(bool returnActiveBullets)
+    {
+        nextFireTime = Time.time;
+
+        if (returnActiveBullets && bulletPool != null)
+            bulletPool.ReturnAllActiveBullets();
+    }
 }

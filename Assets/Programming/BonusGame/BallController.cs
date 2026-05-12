@@ -7,6 +7,13 @@ public class BallController : MonoBehaviour
     [Header("Physics settings")] 
     public float bounceForce = 12f;
     public float maxVelocity = 10f; // max speed while falling
+
+    [Header("Rewarded Revive")]
+    [SerializeField] private float reviveLift = 0.35f;
+    [SerializeField] private float reviveBounceMultiplier = 1f;
+    [SerializeField] private float reviveProtectionSeconds = 0.5f;
+    [SerializeField] private bool shatterFloorUnderBallOnRevive = true;
+    [SerializeField] private float floorSearchDistance = 3f;
     
     private Rigidbody rb;
     public GameObject splashPrefab;
@@ -21,6 +28,7 @@ public class BallController : MonoBehaviour
     public float squashSpeed = 10f;
 
     private int comboMultiplier = 1;
+    private float reviveProtectionUntil;
 
     private void Start()
     {
@@ -76,6 +84,19 @@ public class BallController : MonoBehaviour
            } // hit safe
            else // hit danger
            {
+               if (IsReviveProtected())
+               {
+                   Bounce(collision.contacts[0].point, collision.transform);
+
+                   PassDetector passDetector = collision.gameObject.GetComponentInChildren<PassDetector>();
+                   if (passDetector != null)
+                   {
+                       passDetector.ShatterFloor();
+                   }
+
+                   return;
+               }
+
                if (isSmashing)
                {
                    collision.gameObject.GetComponentInChildren<PassDetector>().ShatterFloor();
@@ -97,6 +118,59 @@ public class BallController : MonoBehaviour
         
         CreateEffects(contactPoint,platformTransform);
         comboMultiplier = 1;
+    }
+
+    public void ReviveFromReward()
+    {
+        float impulse = bounceForce * Mathf.Max(0.1f, reviveBounceMultiplier);
+        ReviveFromReward(reviveLift, impulse, reviveProtectionSeconds, shatterFloorUnderBallOnRevive);
+    }
+
+    public void ReviveFromReward(float lift, float impulse, float protectionSeconds, bool shatterFloorBelow)
+    {
+        EnsureRigidbody();
+        if (rb == null)
+            return;
+
+        reviveProtectionUntil = Time.unscaledTime + Mathf.Max(0f, protectionSeconds);
+        comboMultiplier = 1;
+        isSmashing = false;
+
+        transform.position += Vector3.up * Mathf.Max(0f, lift);
+        transform.localScale = originalScale;
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        rb.linearVelocity = Vector3.up * Mathf.Max(0.1f, impulse);
+        rb.angularVelocity = Vector3.zero;
+
+        if (shatterFloorBelow)
+            ShatterFloorBelow();
+    }
+
+    private bool IsReviveProtected()
+    {
+        return Time.unscaledTime <= reviveProtectionUntil;
+    }
+
+    private void EnsureRigidbody()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+    }
+
+    private void ShatterFloorBelow()
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.2f;
+        if (!Physics.Raycast(origin, Vector3.down, out RaycastHit hit, floorSearchDistance))
+            return;
+
+        PassDetector passDetector = hit.collider.GetComponentInChildren<PassDetector>();
+        if (passDetector == null)
+            passDetector = hit.collider.GetComponentInParent<PassDetector>();
+
+        if (passDetector != null)
+            passDetector.ShatterFloor();
     }
 
     public void IncreaseCombo()

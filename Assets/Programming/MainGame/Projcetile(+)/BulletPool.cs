@@ -162,6 +162,20 @@ public class BulletPool : MonoBehaviour
     /// <summary>
     /// Очистить весь пул.
     /// </summary>
+    public void ReturnAllActiveBullets()
+    {
+        if (activeBullets.Count == 0)
+            return;
+
+        List<Bullet> bulletsToReturn = new List<Bullet>(activeBullets);
+        for (int i = 0; i < bulletsToReturn.Count; i++)
+        {
+            Bullet bullet = bulletsToReturn[i];
+            if (bullet != null)
+                bullet.ReturnToPool();
+        }
+    }
+
     public void Clear()
     {
         foreach (var bullet in bulletPool)

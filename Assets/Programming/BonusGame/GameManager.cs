@@ -1,3 +1,4 @@
+using System.Collections;
 using Config;
 using MainMenu;
 using TMPro;
@@ -19,6 +20,24 @@ public class GameManager : MonoBehaviour
     public Button restartButton;
     public Button mainMenuButton;
 
+    [Header("Rewarded Revive")]
+    [SerializeField] private Button rewardedReviveButton;
+    [SerializeField] private TextMeshProUGUI rewardedReviveCountdownText;
+    [SerializeField] private Image rewardedReviveCountdownImage;
+    [SerializeField] private float rewardedReviveOfferSeconds = 5f;
+    [SerializeField] private bool hideStandardButtonsDuringRewardOffer = true;
+
+    [Header("Rewarded Revive View")]
+    [SerializeField] private string rewardedReviveCountdownFormat = "{0}";
+    [SerializeField, Range(0f, 1f)] private float rewardedReviveImageStartFill = 1f;
+    [SerializeField, Range(0f, 1f)] private float rewardedReviveImageEndFill = 0f;
+
+    [Header("Rewarded Revive Physics")]
+    [SerializeField] private float rewardedReviveBallLift = 0.35f;
+    [SerializeField] private float rewardedReviveBallImpulse = 12f;
+    [SerializeField] private float rewardedReviveProtectionSeconds = 0.5f;
+    [SerializeField] private bool shatterFloorUnderBallOnRevive = true;
+
     [Header("Game References")]
     public LevelGenerator levelGenerator;
     public GameObject ball;
@@ -31,6 +50,8 @@ public class GameManager : MonoBehaviour
     private bool gameOver;
     private bool levelTransition;
     private bool mapLevelCompleted;
+    private bool rewardedReviveUsed;
+    private Coroutine rewardedReviveRoutine;
 
     private void Awake()
     {
@@ -107,8 +128,7 @@ public class GameManager : MonoBehaviour
             ShowConfiguredText(gameOverText, "Game Over! Score: {score}", 0, false);
         }
 
-        ShowRestartButton(true);
-        ShowMainMenuButton(true);
+        StartRewardedReviveOffer();
 
         Time.timeScale = 0f;
     }
@@ -159,6 +179,9 @@ public class GameManager : MonoBehaviour
 
         if (mainMenuButton != null)
             ReplaceButtonAction(mainMenuButton, ReturnToMenu);
+
+        if (rewardedReviveButton != null)
+            ReplaceButtonAction(rewardedReviveButton, OnRewardedReviveClicked);
     }
 
     private void HideEndUi()
@@ -171,6 +194,8 @@ public class GameManager : MonoBehaviour
 
         ShowRestartButton(false);
         ShowMainMenuButton(false);
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
     }
 
     private void CompleteFinalHelixLevel()
@@ -190,6 +215,9 @@ public class GameManager : MonoBehaviour
 
         ShowRestartButton(false);
         ShowMainMenuButton(true);
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
+        StopRewardedReviveRoutine();
 
         Time.timeScale = 0f;
     }
@@ -253,6 +281,151 @@ public class GameManager : MonoBehaviour
             return;
 
         mainMenuButton.gameObject.SetActive(isVisible);
+    }
+
+    private void StartRewardedReviveOffer()
+    {
+        StopRewardedReviveRoutine();
+
+        if (rewardedReviveUsed || rewardedReviveButton == null)
+        {
+            ShowStandardGameOverButtons(true);
+            return;
+        }
+
+        ShowStandardGameOverButtons(!hideStandardButtonsDuringRewardOffer);
+        ShowRewardedReviveButton(true);
+        ShowRewardedReviveCountdown(true);
+        rewardedReviveRoutine = StartCoroutine(RewardedReviveCountdownRoutine());
+    }
+
+    private IEnumerator RewardedReviveCountdownRoutine()
+    {
+        float remainingSeconds = Mathf.Max(0f, rewardedReviveOfferSeconds);
+
+        while (remainingSeconds > 0f && gameOver)
+        {
+            UpdateRewardedReviveCountdown(remainingSeconds);
+            remainingSeconds -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (gameOver)
+            ShowStandardGameOverButtons(true);
+
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
+        rewardedReviveRoutine = null;
+    }
+
+    private void OnRewardedReviveClicked()
+    {
+        if (!gameOver || rewardedReviveUsed)
+            return;
+
+        StopRewardedReviveRoutine();
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
+
+        YandexAdsService.EnsureInstance().ShowRewarded(
+            ReviveAfterReward,
+            ShowStandardGameOverButtonsAfterFailedReward);
+    }
+
+    private void ReviveAfterReward()
+    {
+        rewardedReviveUsed = true;
+        gameOver = false;
+
+        if (gameOverText != null)
+            gameOverText.gameObject.SetActive(false);
+
+        ShowStandardGameOverButtons(false);
+        ShowRewardedReviveButton(false);
+        ShowRewardedReviveCountdown(false);
+        Time.timeScale = 1f;
+
+        BallController ballController = ball != null ? ball.GetComponent<BallController>() : null;
+        if (ballController != null)
+        {
+            ballController.ReviveFromReward(
+                rewardedReviveBallLift,
+                rewardedReviveBallImpulse,
+                rewardedReviveProtectionSeconds,
+                shatterFloorUnderBallOnRevive);
+        }
+
+        UpdateUI();
+    }
+
+    private void ShowStandardGameOverButtonsAfterFailedReward()
+    {
+        if (!gameOver)
+            return;
+
+        ShowStandardGameOverButtons(true);
+    }
+
+    private void ShowStandardGameOverButtons(bool isVisible)
+    {
+        ShowRestartButton(isVisible);
+        ShowMainMenuButton(isVisible);
+    }
+
+    private void ShowRewardedReviveButton(bool isVisible)
+    {
+        if (rewardedReviveButton == null)
+            return;
+
+        rewardedReviveButton.gameObject.SetActive(isVisible);
+    }
+
+    private void ShowRewardedReviveCountdown(bool isVisible)
+    {
+        if (rewardedReviveCountdownText != null)
+            rewardedReviveCountdownText.gameObject.SetActive(isVisible);
+
+        if (rewardedReviveCountdownImage != null)
+        {
+            rewardedReviveCountdownImage.gameObject.SetActive(isVisible);
+            if (isVisible)
+                rewardedReviveCountdownImage.fillAmount = rewardedReviveImageStartFill;
+        }
+    }
+
+    private void UpdateRewardedReviveCountdown(float seconds)
+    {
+        float duration = Mathf.Max(0.01f, rewardedReviveOfferSeconds);
+        float normalizedTimeLeft = Mathf.Clamp01(seconds / duration);
+
+        if (rewardedReviveCountdownText != null)
+            rewardedReviveCountdownText.text = FormatRewardedCountdown(seconds);
+
+        if (rewardedReviveCountdownImage != null)
+            rewardedReviveCountdownImage.fillAmount = Mathf.Lerp(
+                rewardedReviveImageEndFill,
+                rewardedReviveImageStartFill,
+                normalizedTimeLeft);
+    }
+
+    private string FormatRewardedCountdown(float seconds)
+    {
+        int secondsCeil = Mathf.CeilToInt(seconds);
+        if (string.IsNullOrWhiteSpace(rewardedReviveCountdownFormat))
+            return secondsCeil.ToString();
+
+        return rewardedReviveCountdownFormat
+            .Replace("{seconds}", secondsCeil.ToString())
+            .Replace("{0}", secondsCeil.ToString());
+    }
+
+    private void StopRewardedReviveRoutine()
+    {
+        if (rewardedReviveRoutine == null)
+            return;
+
+        StopCoroutine(rewardedReviveRoutine);
+        rewardedReviveRoutine = null;
     }
 
     private void ReplaceButtonAction(Button button, UnityEngine.Events.UnityAction action)
