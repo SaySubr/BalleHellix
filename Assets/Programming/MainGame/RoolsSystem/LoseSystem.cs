@@ -22,7 +22,7 @@ public class LoseSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loseStatsText; // Статистика
 
     [Header("Настройки поражения")]
-    [SerializeField] private string loseMessage = "ПОРАЖЕНИЕ! 💀";
+    [SerializeField] private string loseMessage = "ПОРАЖЕНИЕ!";
     [SerializeField] private Color loseColor = Color.red;
     [SerializeField] private float pauseDelay = 1.5f;
 
@@ -131,7 +131,7 @@ public class LoseSystem : MonoBehaviour
         isLose = true;
         SetPlayerControls(false);
 
-        Debug.Log($"💀💀💀 ПОРАЖЕНИЕ! Танк уничтожен! 💀💀💀");
+        Debug.Log($"ПОРАЖЕНИЕ! Танк уничтожен!");
 
         // Обновляем тексты
         if (loseTitleText != null)
