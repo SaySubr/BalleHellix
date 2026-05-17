@@ -113,12 +113,16 @@ public class SkinSelector : MonoBehaviour
 
     private void CameraMove()
     {
-        if (previewCamera == null || decorator == null)
+        if (decorator == null)
+            return;
+
+        decorator.ScrollTo(CurrentTarget, _selectedIndex);
+
+        if (!decorator.ShouldMovePreviewCamera || previewCamera == null)
             return;
 
         Vector3 targetPosition = decorator.GetPreviewPosition(CurrentTarget, _selectedIndex);
         previewCamera.transform.position = new Vector3(targetPosition.x, targetPosition.y, cameraZ);
-        decorator.ScrollTo(CurrentTarget, _selectedIndex);
     }
 
     private void NotifySelectionChanged()

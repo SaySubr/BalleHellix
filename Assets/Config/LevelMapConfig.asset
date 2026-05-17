@@ -95,8 +95,8 @@ MonoBehaviour:
     columns: 0
   - levelNumber: 2
     islandTargetPoint:
-      scenePath: 
-      sceneObjectName: 
+      scenePath: TargetPointIsland2
+      sceneObjectName: TargetPointIsland2
     useIslandTargetScale: 1
     position: {x: 5, y: 0, z: 5}
     islandRotation: {x: 0, y: 0, z: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 2891578154627905873, guid: dff0f3ab5d5a6c44ea6c6eff86552427, type: 3}
+    islandPrefab: {fileID: 5786507383189525188, guid: c7e2bc73c56ad744ab1e052d3d4e64c1, type: 3}
     islandMaterial: {fileID: 0}
     lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
     islandColor: {r: 1, g: 1, b: 1, a: 1}
@@ -175,8 +175,8 @@ MonoBehaviour:
     columns: 10
   - levelNumber: 3
     islandTargetPoint:
-      scenePath: 
-      sceneObjectName: 
+      scenePath: TargetPointIsland3
+      sceneObjectName: TargetPointIsland3
     useIslandTargetScale: 1
     position: {x: 6, y: 0, z: 25}
     islandRotation: {x: 0, y: 0, z: 0}
@@ -245,7 +245,7 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandPrefab: {fileID: 3434907889958683808, guid: ac645438519e57b4db33dce4f5d49854, type: 3}
     islandMaterial: {fileID: 0}
     lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
     islandColor: {r: 1, g: 1, b: 1, a: 1}
@@ -255,8 +255,8 @@ MonoBehaviour:
     columns: 10
   - levelNumber: 4
     islandTargetPoint:
-      scenePath: 
-      sceneObjectName: 
+      scenePath: TargetPointIsland4
+      sceneObjectName: TargetPointIsland4
     useIslandTargetScale: 1
     position: {x: 7, y: 0, z: 45}
     islandRotation: {x: 0, y: 0, z: 0}
@@ -325,7 +325,7 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 2891578154627905873, guid: dff0f3ab5d5a6c44ea6c6eff86552427, type: 3}
+    islandPrefab: {fileID: 6201003988263370825, guid: b12e94ea6e5947a438867f5cca4849c3, type: 3}
     islandMaterial: {fileID: 0}
     lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
     islandColor: {r: 0.37824848, g: 0.6415094, b: 0.46575674, a: 1}
@@ -335,8 +335,8 @@ MonoBehaviour:
     columns: 10
   - levelNumber: 5
     islandTargetPoint:
-      scenePath: 
-      sceneObjectName: 
+      scenePath: TargetPointIsland5
+      sceneObjectName: TargetPointIsland5
     useIslandTargetScale: 1
     position: {x: 4, y: 0, z: 60}
     islandRotation: {x: 0, y: 0, z: 0}
@@ -405,18 +405,18 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandPrefab: {fileID: 213533566391024840, guid: 5f3b1b13d19ae5541aeadd3f326248c5, type: 3}
     islandMaterial: {fileID: 0}
     lockedIslandMaterial: {fileID: 0}
-    islandColor: {r: 0.23642753, g: 0.30942044, b: 0.6509434, a: 1}
+    islandColor: {r: 0.88916326, g: 0.023529401, b: 0.98039216, a: 1}
     startX: -40
     startZ: -40
     spacing: 10
     columns: 10
   - levelNumber: 6
     islandTargetPoint:
-      scenePath: 
-      sceneObjectName: 
+      scenePath: TargetPointIsland6
+      sceneObjectName: TargetPointIsland6
     useIslandTargetScale: 1
     position: {x: 7, y: 0, z: 80}
     islandRotation: {x: 0, y: 0, z: 0}
@@ -485,7 +485,7 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandPrefab: {fileID: 1103179577394547580, guid: db0c7067a9deee04795cd12c7dc42a1a, type: 3}
     islandMaterial: {fileID: 2100000, guid: a7ca0d7ef97b5f74a897afb0be71aecb, type: 2}
     lockedIslandMaterial: {fileID: 0}
     islandColor: {r: 0.8301887, g: 0.09789959, b: 0.09789959, a: 1}
@@ -495,8 +495,8 @@ MonoBehaviour:
     columns: 10
   - levelNumber: 7
     islandTargetPoint:
-      scenePath: 
-      sceneObjectName: 
+      scenePath: TargetPointIsland7
+      sceneObjectName: TargetPointIsland7
     useIslandTargetScale: 1
     position: {x: 4, y: 0, z: 120}
     islandRotation: {x: 0, y: 0, z: 0}
@@ -565,10 +565,10 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
+    islandPrefab: {fileID: 1103179577394547580, guid: db0c7067a9deee04795cd12c7dc42a1a, type: 3}
     islandMaterial: {fileID: 2100000, guid: a7ca0d7ef97b5f74a897afb0be71aecb, type: 2}
     lockedIslandMaterial: {fileID: 0}
-    islandColor: {r: 1, g: 1, b: 1, a: 1}
+    islandColor: {r: 0.19857404, g: 0.9607843, b: 0, a: 1}
     startX: -40
     startZ: -40
     spacing: 10

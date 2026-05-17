@@ -1,4 +1,5 @@
 using System;
+using Config;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,13 +12,33 @@ public enum SkinTarget
 [CreateAssetMenu(fileName = "SkinCatalogConfig", menuName = "Data/Skin Catalog Config", order = 51)]
 public class SkinConfig : ScriptableObject
 {
+    [Header("Preview Placement")]
+    [SerializeField] private SceneTransformReference previewTargetPoint = new SceneTransformReference();
+    [Tooltip("When Preview Target Point is assigned, keep the camera where it is and move skin previews instead.")]
+    [SerializeField] private bool keepPreviewCameraFixed = true;
+    [SerializeField] private bool usePreviewTargetRotation = true;
+    [SerializeField] private bool usePreviewTargetScale = false;
+
     [SerializeField] private SkinGroup[] groups =
     {
         new SkinGroup { target = SkinTarget.HelixBall, title = "Helix Ball" },
         new SkinGroup { target = SkinTarget.FireballTank, title = "Fireball Tank" }
     };
 
+    public SceneTransformReference PreviewTargetPoint => previewTargetPoint;
+    public bool KeepPreviewCameraFixed => keepPreviewCameraFixed;
+    public bool UsePreviewTargetRotation => usePreviewTargetRotation;
+    public bool UsePreviewTargetScale => usePreviewTargetScale;
     public SkinGroup[] Groups => groups;
+
+    public bool TryGetPreviewTargetPoint(out Transform targetPoint)
+    {
+        targetPoint = previewTargetPoint != null && previewTargetPoint.HasValue
+            ? previewTargetPoint.Resolve()
+            : null;
+
+        return targetPoint != null;
+    }
 
     public SkinItem[] GetSkins(SkinTarget target)
     {

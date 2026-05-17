@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2a2352a26a63943a84140a2438ea8f, type: 3}
   m_Name: SkinCatalogConfig
   m_EditorClassIdentifier: Assembly-CSharp::SkinConfig
+  previewTargetPoint:
+    scenePath: TargetPoint
+    sceneObjectName: TargetPoint
+  keepPreviewCameraFixed: 1
+  usePreviewTargetRotation: 0
+  usePreviewTargetScale: 1
   groups:
   - target: 1
     title: FireBall
