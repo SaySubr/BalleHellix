@@ -43,7 +43,10 @@ namespace MainMenu.LevelMap
 
             foreach (Transform child in islandsParent)
             {
-                Destroy(child.gameObject);
+                if (child.GetComponent<Island>() != null)
+                {
+                    Destroy(child.gameObject);
+                }
             }
 
             foreach (LevelData levelData in levelMapConfig.levels)
@@ -63,8 +66,14 @@ namespace MainMenu.LevelMap
                 return;
             }
 
-            GameObject island = Instantiate(levelData.islandPrefab, levelData.position, Quaternion.identity, islandsParent);
+            IslandPlacement placement = ResolvePlacement(levelData);
+            GameObject island = Instantiate(levelData.islandPrefab, placement.Position, placement.Rotation, islandsParent);
             island.name = $"Island_{levelData.levelNumber}";
+
+            if (placement.OverrideScale)
+            {
+                ApplyWorldScale(island.transform, placement.WorldScale);
+            }
 
             Island islandComponent = island.GetComponent<Island>();
             if (islandComponent == null)
@@ -141,6 +150,84 @@ namespace MainMenu.LevelMap
             }
 
             return levelData.isUnlocked;
+        }
+
+        private IslandPlacement ResolvePlacement(LevelData levelData)
+        {
+            Transform targetPoint = FindTargetPoint(levelData, out bool useTargetScale);
+            if (targetPoint != null)
+            {
+                return new IslandPlacement(
+                    targetPoint.position,
+                    targetPoint.rotation,
+                    useTargetScale,
+                    targetPoint.lossyScale);
+            }
+
+            return new IslandPlacement(
+                levelData.position,
+                Quaternion.Euler(levelData.islandRotation),
+                levelData.overrideIslandScale,
+                levelData.islandScale);
+        }
+
+        private Transform FindTargetPoint(LevelData levelData, out bool useTargetScale)
+        {
+            useTargetScale = false;
+            if (levelData == null)
+                return null;
+
+            if (levelData.islandTargetPoint != null && levelData.islandTargetPoint.HasValue)
+            {
+                Transform targetPoint = levelData.islandTargetPoint.Resolve();
+                if (targetPoint == null)
+                {
+                    Debug.LogWarning($"Level {levelData.levelNumber}: island target point '{levelData.islandTargetPoint.ScenePath}' was not found. Config position will be used.");
+                    return null;
+                }
+
+                useTargetScale = levelData.useIslandTargetScale;
+                return targetPoint;
+            }
+
+            return null;
+        }
+
+        private static void ApplyWorldScale(Transform target, Vector3 worldScale)
+        {
+            Transform parent = target.parent;
+            if (parent == null)
+            {
+                target.localScale = worldScale;
+                return;
+            }
+
+            Vector3 parentScale = parent.lossyScale;
+            target.localScale = new Vector3(
+                DivideScale(worldScale.x, parentScale.x),
+                DivideScale(worldScale.y, parentScale.y),
+                DivideScale(worldScale.z, parentScale.z));
+        }
+
+        private static float DivideScale(float value, float parentScale)
+        {
+            return Mathf.Approximately(parentScale, 0f) ? value : value / parentScale;
+        }
+
+        private readonly struct IslandPlacement
+        {
+            public IslandPlacement(Vector3 position, Quaternion rotation, bool overrideScale, Vector3 worldScale)
+            {
+                Position = position;
+                Rotation = rotation;
+                OverrideScale = overrideScale;
+                WorldScale = worldScale;
+            }
+
+            public Vector3 Position { get; }
+            public Quaternion Rotation { get; }
+            public bool OverrideScale { get; }
+            public Vector3 WorldScale { get; }
         }
     }
 }

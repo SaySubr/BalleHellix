@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70d8fd03c5a6fa84c8c3c5263498af1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.7910385
+      value: -651
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70d8fd03c5a6fa84c8c3c5263498af1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.883265
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70d8fd03c5a6fa84c8c3c5263498af1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 70d8fd03c5a6fa84c8c3c5263498af1f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 60b51f6c6eb714043aa7c0a477213210, type: 2}
+      objectReference: {fileID: 2064599376779250040, guid: f47f7acf138d4f540ac6549f64927db4, type: 3}
     - target: {fileID: 919132149155446097, guid: 70d8fd03c5a6fa84c8c3c5263498af1f, type: 3}
       propertyPath: m_Name
       value: Mount

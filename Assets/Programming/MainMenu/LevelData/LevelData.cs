@@ -117,8 +117,24 @@ namespace Config
         [Header("Main")]
         [Min(1)] public int levelNumber = 1;
 
-        [Tooltip("Used by LevelMapConfig spawner. Manual islands can ignore this.")]
+        [Header("Island Placement")]
+        [Tooltip("Drag a scene empty object here. The config stores its scene path and the island spawns on that transform.")]
+        public SceneTransformReference islandTargetPoint = new SceneTransformReference();
+
+        [Tooltip("Copy the target point scale to the spawned island.")]
+        public bool useIslandTargetScale = true;
+
+        [Tooltip("World position used by the island spawner when Target Point is empty.")]
         public Vector3 position;
+
+        [Tooltip("World rotation used by the island spawner when Target Point is empty.")]
+        public Vector3 islandRotation = Vector3.zero;
+
+        [Tooltip("Override the spawned island root scale from this config.")]
+        public bool overrideIslandScale = false;
+
+        [Tooltip("World scale used only when Override Island Scale is enabled.")]
+        public Vector3 islandScale = Vector3.one;
 
         [Header("Progress")]
         [Tooltip("Default editor state. Runtime save data has priority when DataController exists.")]

@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Config.LevelMapConfig
   levels:
   - levelNumber: 1
+    islandTargetPoint:
+      scenePath: TargetPointIsland1
+      sceneObjectName: TargetPointIsland1
+    useIslandTargetScale: 1
     position: {x: 0, y: 0, z: 0}
+    islandRotation: {x: 0, y: 17.62, z: 0}
+    overrideIslandScale: 1
+    islandScale: {x: 100, y: 100, z: 100}
     isUnlocked: 1
     starsEarned: 3
     gameType: 0
@@ -24,13 +31,13 @@ MonoBehaviour:
       towerBlockPrefab: {fileID: 6661967844676861532, guid: f113b36e287e18d4fbc4ba3ac83daf43, type: 3}
       obstaclePrefab: {fileID: 0}
       background:
-        spawnBackground: 1
-        backgroundPrefab: {fileID: 7681553491997659006, guid: def75ea83cfc433488cbda071d1628e0, type: 3}
-        backgroundMaterial: {fileID: 2100000, guid: 60b51f6c6eb714043aa7c0a477213210, type: 2}
+        spawnBackground: 0
+        backgroundPrefab: {fileID: 0}
+        backgroundMaterial: {fileID: 0}
         positionOffset: {x: 0, y: 0, z: 0}
         rotationOffset: {x: -90, y: 90, z: 90}
         scale: {x: 200, y: 200, z: 800}
-        parentToSpawner: 1
+        parentToSpawner: 0
       overrideTower: 1
       towerHeightRange: {x: 20, y: 25}
       blockHeight: 0.6
@@ -78,16 +85,23 @@ MonoBehaviour:
       thickness: 0.2
       maxDangerZones: 2
       dangerZoneSize: 10
-    islandPrefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-    islandMaterial: {fileID: 0}
+    islandPrefab: {fileID: 6455668253120040351, guid: a4c3cb72112fd1845bd1ab9e11447a63, type: 3}
+    islandMaterial: {fileID: 2100000, guid: ee6dcb77c5791804f8558ae5d3efcbd7, type: 2}
     lockedIslandMaterial: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
     islandColor: {r: 0.2532465, g: 0.7735849, b: 0.12771447, a: 1}
-    startX: -40
-    startZ: -40
-    spacing: 10
-    columns: 10
+    startX: 0
+    startZ: 0
+    spacing: 0
+    columns: 0
   - levelNumber: 2
+    islandTargetPoint:
+      scenePath: 
+      sceneObjectName: 
+    useIslandTargetScale: 1
     position: {x: 5, y: 0, z: 5}
+    islandRotation: {x: 0, y: 0, z: 0}
+    overrideIslandScale: 0
+    islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 1
     starsEarned: 3
     gameType: 1
@@ -160,7 +174,14 @@ MonoBehaviour:
     spacing: 10
     columns: 10
   - levelNumber: 3
+    islandTargetPoint:
+      scenePath: 
+      sceneObjectName: 
+    useIslandTargetScale: 1
     position: {x: 6, y: 0, z: 25}
+    islandRotation: {x: 0, y: 0, z: 0}
+    overrideIslandScale: 0
+    islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 1
     starsEarned: 3
     gameType: 0
@@ -233,7 +254,14 @@ MonoBehaviour:
     spacing: 10
     columns: 10
   - levelNumber: 4
+    islandTargetPoint:
+      scenePath: 
+      sceneObjectName: 
+    useIslandTargetScale: 1
     position: {x: 7, y: 0, z: 45}
+    islandRotation: {x: 0, y: 0, z: 0}
+    overrideIslandScale: 0
+    islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 0
     starsEarned: 3
     gameType: 1
@@ -306,7 +334,14 @@ MonoBehaviour:
     spacing: 10
     columns: 10
   - levelNumber: 5
+    islandTargetPoint:
+      scenePath: 
+      sceneObjectName: 
+    useIslandTargetScale: 1
     position: {x: 4, y: 0, z: 60}
+    islandRotation: {x: 0, y: 0, z: 0}
+    overrideIslandScale: 0
+    islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 0
     starsEarned: 3
     gameType: 0
@@ -379,7 +414,14 @@ MonoBehaviour:
     spacing: 10
     columns: 10
   - levelNumber: 6
+    islandTargetPoint:
+      scenePath: 
+      sceneObjectName: 
+    useIslandTargetScale: 1
     position: {x: 7, y: 0, z: 80}
+    islandRotation: {x: 0, y: 0, z: 0}
+    overrideIslandScale: 0
+    islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 0
     starsEarned: 0
     gameType: 0
@@ -452,7 +494,14 @@ MonoBehaviour:
     spacing: 10
     columns: 10
   - levelNumber: 7
+    islandTargetPoint:
+      scenePath: 
+      sceneObjectName: 
+    useIslandTargetScale: 1
     position: {x: 4, y: 0, z: 120}
+    islandRotation: {x: 0, y: 0, z: 0}
+    overrideIslandScale: 0
+    islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 0
     starsEarned: 3
     gameType: 1
