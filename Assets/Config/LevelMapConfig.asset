@@ -188,7 +188,7 @@ MonoBehaviour:
     isBonusLevel: 0
     legacyBonusMigrated: 1
     fireball:
-      towerBlockPrefab: {fileID: 3813061809764896953, guid: fb05a642530131045991efe487bddf09, type: 3}
+      towerBlockPrefab: {fileID: 2268461987523669164, guid: 0b9c3f10b7d10f64eb918d74d0118d87, type: 3}
       obstaclePrefab: {fileID: 2777321617215310124, guid: b04f899c3513bbc4596dc544019eea8b, type: 3}
       background:
         spawnBackground: 1
@@ -348,8 +348,8 @@ MonoBehaviour:
     isBonusLevel: 0
     legacyBonusMigrated: 1
     fireball:
-      towerBlockPrefab: {fileID: 0}
-      obstaclePrefab: {fileID: 0}
+      towerBlockPrefab: {fileID: 6142343234571184488, guid: 242dff06b66986046b3d6b793ad894e8, type: 3}
+      obstaclePrefab: {fileID: 919132149155446097, guid: c38bc0634e2467348b54c3bbcca0ed8a, type: 3}
       background:
         spawnBackground: 1
         backgroundPrefab: {fileID: 0}
@@ -363,31 +363,31 @@ MonoBehaviour:
       blockHeight: 0.5
       useVisibilityCulling: 1
       visibleBlocksCount: 10
-      randomizeTowerRotation: 1
-      towerRotationSpeedRange: {x: 30, y: 180}
+      randomizeTowerRotation: 0
+      towerRotationSpeedRange: {x: 20, y: 20}
       rotateTowerBlocks: 1
-      towerBlockStartRotation: {x: 0, y: 0, z: 0}
-      towerRotationAxis: {x: 0, y: 1, z: 0}
-      randomizeTowerRotationDirection: 1
+      towerBlockStartRotation: {x: 450, y: 0, z: 360}
+      towerRotationAxis: {x: 0, y: 0, z: 20}
+      randomizeTowerRotationDirection: 0
       invertTowerRotation: 0
-      towerBlockPulsate: 0
-      towerPulseSpeed: 2
+      towerBlockPulsate: 1
+      towerPulseSpeed: 0.7
       towerPulseAmount: 0.1
       towerBlockDestroyEffect: {fileID: 0}
-      randomizeTowerScale: 1
-      towerScaleRange: {x: 0.5, y: 1.5}
-      uniformTowerScale: 1
-      overrideObstacles: 1
-      obstacleCountRange: {x: 5, y: 20}
+      randomizeTowerScale: 0
+      towerScaleRange: {x: 1, y: 1.2}
+      uniformTowerScale: 0
+      overrideObstacles: 0
+      obstacleCountRange: {x: 0, y: 0}
       randomSpacing: 1
-      spacingRange: {x: 1, y: 5}
+      spacingRange: {x: 2, y: 4}
       randomizeObstacleRotation: 1
       obstacleRotationSpeedRange: {x: 30, y: 180}
       randomizeObstacleSpeed: 1
-      obstacleSpeedRange: {x: 3, y: 10}
-      randomizeObstacleScale: 1
-      obstacleScaleRange: {x: 0.5, y: 1.5}
-      uniformObstacleScale: 1
+      obstacleSpeedRange: {x: 0.3, y: 0.5}
+      randomizeObstacleScale: 0
+      obstacleScaleRange: {x: 0.5, y: 0.2}
+      uniformObstacleScale: 0
       obstacleParabolaHeight: 1
       useObjectPool: 1
       poolInitialSize: 30
@@ -424,8 +424,8 @@ MonoBehaviour:
     islandScale: {x: 1, y: 1, z: 1}
     isUnlocked: 0
     starsEarned: 0
-    gameType: 0
-    isBonusLevel: 0
+    gameType: 1
+    isBonusLevel: 1
     legacyBonusMigrated: 1
     fireball:
       towerBlockPrefab: {fileID: 0}

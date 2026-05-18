@@ -27,11 +27,11 @@ MonoBehaviour:
       cost: 0
       prefab: {fileID: 4337226263155959577, guid: d2be410a98970874099bd9cf14ce0025, type: 3}
     - id: 2
-      displayName: DSAD
+      displayName: Cube
       cost: 5
       prefab: {fileID: 8762272648331896080, guid: eac0aeccf3635454dbdcbe7503db199d, type: 3}
     - id: 3
-      displayName: dsadds
+      displayName: Cube2
       cost: 17
       prefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
   - target: 0
@@ -42,10 +42,10 @@ MonoBehaviour:
       cost: 0
       prefab: {fileID: 7230772709336453376, guid: 8979ca814b4eeb342af82396ccdd605e, type: 3}
     - id: 2
-      displayName: DSADSA
+      displayName: Pistol
       cost: 5
       prefab: {fileID: 4337226263155959577, guid: d2be410a98970874099bd9cf14ce0025, type: 3}
     - id: 3
-      displayName: DSADSA
+      displayName: Cube
       cost: 19
       prefab: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
