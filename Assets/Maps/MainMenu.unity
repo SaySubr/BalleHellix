@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.LevelMap.IslandSpawner
   levelMapConfig: {fileID: 11400000, guid: 89df7bc02ec302b4e9f68005f44b85e2, type: 2}
-  islandsParent: {fileID: 9223265924362050403}
+  islandsParent: {fileID: 0}
 --- !u!4 &867771624
 Transform:
   m_ObjectHideFlags: 0
@@ -2388,91 +2388,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &9223265924362050402
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.99931
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.43343
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -14.90852
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647819096579680568, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_Size.x
-      value: 1.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647819096579680568, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_Size.y
-      value: 1.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647819096579680568, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_Name
-      value: Maps
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564065027846755929, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
---- !u!4 &9223265924362050403 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2274782636161131994, guid: 11524899a1866624e86fb4aeeab008fa, type: 3}
-  m_PrefabInstance: {fileID: 9223265924362050402}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 906270370}
   - {fileID: 1100687744}
-  - {fileID: 9223265924362050402}
   - {fileID: 371688546}
   - {fileID: 598207986}
   - {fileID: 937756774}
