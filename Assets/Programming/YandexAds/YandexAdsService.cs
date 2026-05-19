@@ -15,14 +15,14 @@ public class YandexAdsService : MonoBehaviour
 
     [Header("Banner")]
     [SerializeField] private bool showBannerOnStart = true;
-    [SerializeField] private string bannerAdUnitId = "demo-banner-yandex"; //Вставить ключ от баннера из Yandex partner https://partner.yandex.ru
+    [SerializeField] private string bannerAdUnitId = "R-M-19302950-1"; //Вставить ключ от баннера из Yandex partner https://partner.yandex.ru
 
     [Header("Interstitial")]
-    [SerializeField] private string interstitialAdUnitId = "demo-interstitial-yandex"; //Вставить ключ от межстраничной рекламы из Yandex partner https://partner.yandex.ru
+    [SerializeField] private string interstitialAdUnitId = "R-M-19302950-2"; //Вставить ключ от межстраничной рекламы из Yandex partner https://partner.yandex.ru
     [SerializeField] private int interstitialEveryLevelLaunches = 3;
 
     [Header("Rewarded")]
-    [SerializeField] private string rewardedAdUnitId = "demo-rewarded-yandex";//Вставить ключ от рекламы за награду из Yandex partner https://partner.yandex.ru
+    [SerializeField] private string rewardedAdUnitId = "R-M-19302950-3";//Вставить ключ от рекламы за награду из Yandex partner https://partner.yandex.ru
 
     private static YandexAdsService instance;
 

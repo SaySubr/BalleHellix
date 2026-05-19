@@ -69,7 +69,7 @@ public class YandexMobileAdsInterstitialDemoScript : MonoBehaviour
         //YandexAds.SetAgeRestricted(true);
 
         // Replace demo Unit ID 'demo-interstitial-yandex' with actual Ad Unit ID
-        string adUnitId = "demo-interstitial-yandex";
+        string adUnitId = "R-M-19302950-2";
 
         if (this.interstitial != null)
         {

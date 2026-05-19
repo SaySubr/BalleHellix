@@ -54,7 +54,7 @@ public class YandexMobileAdsBannerDemoScript : MonoBehaviour
         //YandexAds.SetAgeRestricted(true);
 
         // Replace demo Unit ID 'demo-banner-yandex' with actual Ad Unit ID
-        string adUnitId = "demo-banner-yandex";
+        string adUnitId = "R-M-19302950-1";
 
         if (this.banner != null)
         {

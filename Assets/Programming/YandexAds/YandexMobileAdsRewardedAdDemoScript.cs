@@ -75,7 +75,7 @@ public class YandexMobileAdsRewardedAdDemoScript : MonoBehaviour
         }
 
         // Replace demo Unit ID 'demo-rewarded-yandex' with actual Ad Unit ID
-        string adUnitId = "demo-rewarded-yandex";
+        string adUnitId = "R-M-19302950-3";
 
         this.rewardedAdLoader.LoadAd(
             this.CreateAdRequest(adUnitId),
